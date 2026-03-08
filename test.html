@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpersKJ Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .test-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .error {
+            color: #d32f2f;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+        }
+
+        button {
+            padding: 8px 16px;
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1565c0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>HelpersKJ English Test</h1>
+
+    <div class="test-box">
+        <label>Uppercase (auto-transform):</label>
+        <input type="text" id="input-uppercase" placeholder="Type here...">
+    </div>
+
+    <div class="test-box">
+        <label>Numbers Only:</label>
+        <input type="text" id="input-numbers" placeholder="Type numbers only...">
+    </div>
+
+    <div class="test-box">
+        <label>Validate Empty Field:</label>
+        <input type="text" id="input-empty">
+        <button id="btn-validate">Validate</button>
+        <span id="error-empty" class="error"></span>
+    </div>
+
+    <div class="test-box">
+        <h3>Actions</h3>
+        <button id="btn-modal">Alert Test</button>
+        <button id="btn-time">Show Local Time</button>
+        <p id="display-time" style="font-weight: bold; color: #1976d2;"></p>
+    </div>
+
+    <!-- Load via ESM -->
+    <script type="module">
+        import { kj, getLocalTime, Regex } from './dist/helpers-kj.es.js';
+
+        // Uppercase
+        kj('#input-uppercase').uppercase();
+
+        // Numbers only
+        kj('#input-numbers').validateField(Regex.onlyNumbers());
+
+        // Validate empty
+        document.getElementById('btn-validate').addEventListener('click', () => {
+            kj('#input-empty').emptyField('#error-empty');
+        });
+
+        // Modal alert
+        document.getElementById('btn-modal').addEventListener('click', () => {
+            kj('body').test();
+        });
+
+        // Local Time
+        document.getElementById('btn-time').addEventListener('click', () => {
+            document.getElementById('display-time').innerText = getLocalTime();
+        });
+    </script>
+</body>
+
+</html>

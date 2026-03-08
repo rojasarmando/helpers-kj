@@ -1,0 +1,32 @@
+{
+  "name": "helpers-kj",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/helpers-kj.umd.js",
+  "module": "./dist/helpers-kj.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/helpers-kj.es.js",
+      "require": "./dist/helpers-kj.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --emitDeclarationOnly",
+    "test": "vitest run"
+  },
+  "keywords": [],
+  "author": "rojasarmando",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jsdom": "^20.0.1",
+    "@types/node": "^16.0.0",
+    "@vitest/coverage-v8": "^0.34.6",
+    "jsdom": "^22.1.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.5.3",
+    "vitest": "^0.34.6"
+  }
+}
