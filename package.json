@@ -1,10 +1,15 @@
 {
   "name": "helpers-kj",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "description": "Modern Vanilla TypeScript DOM utility library inspired by jQuery.",
   "type": "module",
   "main": "./dist/helpers-kj.umd.js",
   "module": "./dist/helpers-kj.es.js",
   "types": "./dist/index.d.ts",
+  "unpkg": "./dist/helpers-kj.umd.js",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -15,10 +20,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc --emitDeclarationOnly",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
-  "author": "rojasarmando",
+  "author": "Armando Rojas",
   "license": "MIT",
   "devDependencies": {
     "@types/jsdom": "^20.0.1",

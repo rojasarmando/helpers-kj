@@ -1,0 +1,13 @@
+# Exclude development files from npm package
+.agents/
+.github/
+.vscode/
+node_modules/
+package-lock.json
+tsconfig.json
+vite.config.ts
+vitest.config.ts
+.gitignore
+.npmrc
+test.html
+walkthrough.md

@@ -7,9 +7,11 @@ export default defineConfig({
             entry: resolve(__dirname, 'src/index.ts'),
             name: 'HelpersKJ',
             fileName: (format) => `helpers-kj.${format}.js`,
+            formats: ['es', 'umd']
         },
+        outDir: 'dist',
         rollupOptions: {
-            external: [], // No external dependencies as requested (Vanilla JS)
+            external: [],
             output: {
                 globals: {},
             },
