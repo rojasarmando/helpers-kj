@@ -3,19 +3,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=flat&logo=vitest&logoColor=white)](https://vitest.dev/)
 
-A premium, high-performance, and native TypeScript DOM manipulation library. Inspired by the simplicity of jQuery but built with modern Vanilla JS standards. **HelpersKJ** is designed to be lightweight, typed, and dependency-free.
-
----
-
-## ✨ Features
-
-- 🚀 **Lightning Fast**: No overhead, just native DOM manipulation.
-- 📦 **Zero Dependencies**: Pure Vanilla TypeScript.
-- 🛡️ **Type Safe**: Full IntelliSense support with auto-generated declaration files.
-- 🌐 **Dual Distribution**: Ships with both **ES Modules (ESM)** and **UMD** (for CDN/Unpkg).
-- 🧪 **Rock Solid**: 100% test coverage on core utilities using Vitest & JSDOM.
+A premium, high-performance, and native TypeScript DOM manipulation library. Inspired by the simplicity of jQuery but built with modern Vanilla JS standards.
 
 ---
 
@@ -25,87 +14,79 @@ A premium, high-performance, and native TypeScript DOM manipulation library. Ins
 npm install helpers-kj
 ```
 
-Or use it via CDN:
+Or use it via CDN (Unpkg):
 ```html
 <script src="https://unpkg.com/helpers-kj/dist/helpers-kj.umd.js"></script>
 ```
 
 ---
 
-## 🛠️ Quick Start
+## 🛠️ Usage Modes
 
-### The `kj()` Factory
-The entry point of the library is the `kj()` function. It accepts selectors, `HTMLElement`, or `NodeList`.
-
+### 1. Modern Module (ESM)
 ```typescript
-import { kj } from 'helpers-kj';
+import { kj, randomNumber } from 'helpers-kj';
 
-// Apply a premium shadow effect
-kj('.card').shadow('rgba(0,0,0,0.1)');
-
-// Chainable actions
-kj('button')
-  .visibility(true)
-  .disabled(false);
+kj('#app').shadow('blue');
 ```
 
-### Form Validation
-Built-in helpers for common validation patterns:
-
-```typescript
-// Auto-uppercase inputs as the user types
-kj('#username').uppercase();
-
-// Validate empty field with error message
-kj('#email').emptyField('#email-error');
-
-// Secure password validation (Uppercase + Lowercase + Number)
-kj('#password').securePassword('#pass-error');
-```
-
-### Advanced Utilities
-Standalone functions for daily tasks:
-
-```typescript
-import { randomNumber, getLocalTime, ajax } from 'helpers-kj';
-
-const code = randomNumber(1000, 9999);
-console.log(`Your time is: ${getLocalTime()}`);
-
-// Clean AJAX requests
-ajax('https://api.example.com/data', (data) => {
-  console.log('Received:', data);
-}, { key: 'value' });
+### 2. Standard Browser (CDN)
+```html
+<script src="https://unpkg.com/helpers-kj/dist/helpers-kj.umd.js"></script>
+<script>
+  kj('#username').uppercase();
+</script>
 ```
 
 ---
 
-## 🧪 Development & Testing
+## 📚 API Reference
 
-We take quality seriously. Our test suite ensures every helper works as expected across environments.
+### DOM Manipulation (`kj()`)
 
-```bash
-# Install dependencies
-npm install
+The `kj(selector)` function returns a `HelpersKJ` instance with the following methods:
 
-# Run the test suite
-npm test
+| Method | Description | Example |
+| :--- | :--- | :--- |
+| `.shadow(color?)` | Applies a box-shadow effect. Default is 'white'. Pass `false` or `"none"` to remove. | `kj('.card').shadow('red')` |
+| `.disabled(bool)` | Enables or disables an input/button. | `kj('#btn').disabled(true)` |
+| `.visibility(bool)`| Toggles `display: block` or `none`. | `kj('.loader').visibility(false)` |
+| `.noCopy()` | Prevents cut, copy, and paste on the element. | `kj('.private').noCopy()` |
+| `.uppercase()` | Transforms text to uppercase (live for inputs, immediate for others). | `kj('#name').uppercase()` |
+| `.validateField(str)`| Restricts input to only specific characters. | `kj('#age').validateField('0123456789')` |
+| `.maxLength(num)` | Sets the `maxlength` attribute. | `kj('#zip').maxLength(5)` |
+| `.emptyField(sel)` | Validates if input is empty and shows error in `sel`. | `kj('#email').emptyField('#err')` |
+| `.length(sel, min)`| Validates minimum length and shows error in `sel`. | `kj('#pwd').length('#err', 8)` |
+| `.compare(sel, err)`| Compares current input with another element `sel`. | `kj('#pwd2').compare('#pwd', '#err')` |
+| `.stripSpace()` | Trims whitespace from input value. | `kj('#user').stripSpace()` |
+| `.securePassword(e)`| Validates password (min 1 Upper, 1 Lower, 1 Number). | `kj('#pwd').securePassword('#err')` |
+| `.route(url)` | Redirects the page when the element is clicked. | `kj('#home').route('/index.html')` |
+| `.clear(selector)` | Clears the innerHTML of `selector` when current element is clicked. | `kj('#reset').clear('#output')` |
+| `.test()` | Shows a friendly alert message. | `kj('body').test()` |
 
-# Build for production
-npm run build
-```
+### Standalone Utilities
+
+You can also import/use these utility functions:
+
+| Function | Description | Example |
+| :--- | :--- | :--- |
+| `randomNumber(min, max)` | Returns a random integer between min and max. | `const n = randomNumber(1, 10)` |
+| `getLocalTime(date?)` | Formats time as `HH:MM:SSam/pm`. | `getLocalTime()` |
+| `ajax(url, cb, p?, m?)`| Simplified Fetch wrapper for JSON requests. | `ajax('/api', console.log)` |
+
+#### Regex Presets
+Available via `HelpersKJUtils.Regex` or individual imports:
+- `Regex.onlyNumbers()`
+- `Regex.onlyLetters()`
+- `Regex.onlyLettersNumbers()`
+- `Regex.onlyPasswords()`
 
 ---
 
 ## 👤 Author
-
-**Armando Rojas**
-- GitHub: [@rojasarmando](https://github.com/rojasarmando)
-
-*Refactored from a jQuery legacy project into a modern TS powerhouse.*
+**Armando Rojas** - [rojasarmando](https://github.com/rojasarmando)
 
 ---
 
 ## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT
